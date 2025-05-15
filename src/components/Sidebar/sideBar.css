@@ -1,0 +1,44 @@
+.side-bar.task-bar {
+  background-color: rgb(0 0 0 / 0.5);
+  padding: 6px;
+  .task-bar-icons,
+  .task-bar-apps {
+    button.icon {
+      padding: 7px;
+
+      width: 56px;
+      height: 56px;
+      cursor: pointer;
+
+      img {
+        width: calc(100%);
+        height: calc(100%);
+        object-fit: contain;
+        object-position: center;
+      }
+      &:hover {
+        background-color: rgb(255 255 255 / 0.1);
+        border-radius: 8px;
+      }
+      &.selected {
+        position: relative;
+        padding-left: 10px;
+        &::before {
+          border-radius: 50%;
+          content: "";
+          position: absolute;
+          top: calc(50% - 2.5px);
+          left: 1px;
+          width: 5px;
+          height: 5px;
+          background-color: #e95420;
+        }
+      }
+    }
+    .trash-break {
+      margin: 10px 5px;
+      color: grey;
+      height: 2px;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+.main-section {
+  display: flex;
+  height: calc(100vh - 32px);
+  background-size: cover;
+  background-repeat: no-repeat;
+}

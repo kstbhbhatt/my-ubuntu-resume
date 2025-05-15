@@ -1,0 +1,124 @@
+.ubuntu-window {
+  background-color: #f6f6f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: fixed;
+  width: 800px;
+  height: 500px;
+  transition: all 0.3s ease;
+}
+/* Add to window.css */
+.ubuntu-window {
+  /* ...existing styles... */
+  user-select: none;
+  touch-action: none;
+  transition: none; /* Remove any transitions that might cause delay */
+}
+
+/* Ensure no transitions are active during drag */
+.ubuntu-window[data-dragging="true"] {
+  transition: none !important;
+}
+.window-controls {
+  pointer-events: auto;
+}
+
+.window-control {
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.ubuntu-window.maximized {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 0;
+}
+
+.ubuntu-window.minimized {
+  transform: scale(0.1);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.window-titlebar {
+  background: #3c3b37;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.window-controls {
+  padding: 8px 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.window-control {
+  border: none;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.window-control.close {
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  /* background-color: #e95420; Ubuntu orange-red */
+}
+
+.window-control.minimize {
+  background-color: #dfb80c; /* Yellow */
+}
+
+.window-control.maximize {
+  background-color: #46a045; /* Green */
+}
+
+.window-control:hover {
+  filter: brightness(1.1);
+}
+
+.window-title {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.window-content {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+}
+/* Add resize handle */
+.resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 15px;
+  height: 15px;
+  cursor: nwse-resize;
+  background: transparent;
+  z-index: 10;
+}
+
+.resize-handle:hover::before {
+  content: "";
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+}
