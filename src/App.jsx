@@ -8,6 +8,7 @@ import FolderIcon from "./assets/icons/folder.png";
 import TerminalIcon from "./assets/icons/terminal.png";
 import vsCodeIcon from "./assets/icons/vscode.svg";
 import ChromeIcon from "./assets/icons/chrome-logo.svg";
+import Chrome from "./components/Chrome/Chrome";
 
 function App() {
   // Single source of truth for all app/window state
@@ -22,7 +23,7 @@ function App() {
       isMaximized: false,
       position: { x: 100, y: 100 },
       size: { width: 800, height: 500 },
-      content: "Chrome content",
+      content: <Chrome />,
       zIndex: 0,
     },
     aboutMe: {

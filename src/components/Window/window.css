@@ -97,8 +97,6 @@
 
 .window-content {
   flex: 1;
-  overflow: auto;
-  padding: 16px;
 }
 /* Add resize handle */
 .resize-handle {
