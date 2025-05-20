@@ -74,15 +74,16 @@ function App() {
   const openWindows = Object.values(apps).filter((app) => app.isOpen);
 
   // Max z-index for managing focus
-  const [maxZIndex, setMaxZIndex] = useState(1);
+  const [maxZIndex, setMaxZIndex] = useState(2);
 
   const bringToFront = (appId) => {
-    setMaxZIndex((z) => z + 1);
+    const maxZindex = Object.values(apps).map((app) => app.zIndex);
+    const maxZIndex = Math.max(...maxZindex);
     setApps((prev) => ({
       ...prev,
       [appId]: {
         ...prev[appId],
-        zIndex: maxZIndex,
+        zIndex: maxZIndex + 1,
       },
     }));
   };

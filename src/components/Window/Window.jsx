@@ -21,15 +21,14 @@ export const Window = ({ windowData, children, onClose = () => {} }) => {
   const [size, setSize] = useState(initialSize || { width: 800, height: 500 });
   const [resizing, setResizing] = useState(false);
 
-  // Bring window to front when clicked
-  const handleWindowClick = () => {
-    bringToFront(id);
-  };
-
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id,
     disabled: isMaximized || resizing,
   });
+
+  const handleMouseDown = () => {
+    bringToFront(id);
+  };
 
   const style = {
     transform: isMaximized
@@ -43,26 +42,25 @@ export const Window = ({ windowData, children, onClose = () => {} }) => {
     height: isMaximized ? "100%" : `${size.height}px`,
     // You can add a will-change property for better performance
     willChange: "transform",
-  };
-
-  // Handle resize
-  const handleResize = (e) => {
-    if (resizing && !isMaximized) {
-      const dx = e.movementX;
-      const dy = e.movementY;
-
-      setSize((prev) => ({
-        width: Math.max(400, prev.width + dx),
-        height: Math.max(300, prev.height + dy),
-      }));
-    }
+    zIndex: zIndex,
   };
 
   // Resize events
   const startResize = () => setResizing(true);
   const stopResize = () => setResizing(false);
-
   useEffect(() => {
+    // Handle resize
+    const handleResize = (e) => {
+      if (resizing && !isMaximized) {
+        const dx = e.movementX;
+        const dy = e.movementY;
+
+        setSize((prev) => ({
+          width: Math.max(400, prev.width + dx),
+          height: Math.max(300, prev.height + dy),
+        }));
+      }
+    };
     if (resizing) {
       window.addEventListener("mousemove", handleResize);
       window.addEventListener("mouseup", stopResize);
@@ -92,7 +90,7 @@ export const Window = ({ windowData, children, onClose = () => {} }) => {
         isMinimized ? "minimized" : ""
       }`}
       style={isMaximized || isMinimized ? undefined : style}
-      onClick={handleWindowClick}
+      onMouseDown={handleMouseDown}
     >
       <div className="window-titlebar">
         <div
